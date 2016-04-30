@@ -17,11 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        // Start the local heartbeat
+        HueManager.sharedInstance.enableLocalHeartbeat()
+        
         // Initialize the window
         let window: UIWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         // Initialize the navigation controller
         let navigationController = NavigationController(rootViewController: UIViewController())
+        
+        // If the app isn't connected to a bridge, begin the discovery process
+        if (HueManager.sharedInstance.connectedBridge == nil)
+        {
+            // Initialize a bridge discovery view controller
+            let discoveryViewController = BridgeDiscoveryViewController()
+            navigationController.pushViewController(discoveryViewController, animated: false)
+        }
         
         // Set the root view controller and make visible
         window.rootViewController = navigationController
