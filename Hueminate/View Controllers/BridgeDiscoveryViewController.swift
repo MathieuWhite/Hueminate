@@ -98,7 +98,7 @@ class BridgeDiscoveryViewController: UIViewController {
             if (bridge != nil)
             {
                 MWLog("Found bridge (\(bridge!.id)) with IP: \(bridge!.ip)")
-                self.promptToConnectToBridge(bridge!)
+                self.startPushLinkAuthenticationWithBridge(bridge!)
             }
             else
             {
@@ -106,29 +106,6 @@ class BridgeDiscoveryViewController: UIViewController {
                 self.button?.enabled = true
             }
         }
-    }
-    
-    private func promptToConnectToBridge(bridge: HueBridge)
-    {
-        let alertController = UIAlertController(title: NSLocalizedString("Bridge Found", comment: ""),
-                                                message: NSLocalizedString("Would you like to connect to it?", comment: ""),
-                                                preferredStyle: .Alert)
-        
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""),
-            style: .Default,
-            handler: { (action) in
-                self.startPushLinkAuthenticationWithBridge(bridge)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""),
-            style: .Cancel,
-            handler: nil))
-        
-        
-        self.presentViewController(alertController, animated: true, completion: {
-            self.button?.enabled = true
-        })
-        
     }
     
     private func startPushLinkAuthenticationWithBridge(bridge: HueBridge)
