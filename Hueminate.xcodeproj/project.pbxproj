@@ -17,6 +17,8 @@
 		4EA65EE51CD4D603006EBCA9 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EDA1CD4D603006EBCA9 /* DDTTYLogger.m */; };
 		4EA65EE61CD4D603006EBCA9 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EDD1CD4D603006EBCA9 /* ContextFilterLogFormatter.m */; };
 		4EA65EE71CD4D603006EBCA9 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EDF1CD4D603006EBCA9 /* DispatchQueueLogFormatter.m */; };
+		4EA65EEA1CD55DB3006EBCA9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */; };
+		4EA65EEE1CD56065006EBCA9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EED1CD56065006EBCA9 /* TabBarController.swift */; };
 		4EAA3BDD1CD4D42F0047B605 /* HueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BDC1CD4D42F0047B605 /* HueManager.swift */; };
 		4EAA3BE11CD4D4380047B605 /* BridgeDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BDF1CD4D4380047B605 /* BridgeDiscoveryViewController.swift */; };
 		4EAA3BE21CD4D4380047B605 /* LightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BE01CD4D4380047B605 /* LightsViewController.swift */; };
@@ -42,6 +44,8 @@
 		4EA65EDD1CD4D603006EBCA9 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		4EA65EDE1CD4D603006EBCA9 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		4EA65EDF1CD4D603006EBCA9 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		4EA65EED1CD56065006EBCA9 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4EAA3BDC1CD4D42F0047B605 /* HueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueManager.swift; sourceTree = "<group>"; };
 		4EAA3BDF1CD4D4380047B605 /* BridgeDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeDiscoveryViewController.swift; sourceTree = "<group>"; };
 		4EAA3BE01CD4D4380047B605 /* LightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 			children = (
 				4E8415441CD4C64100950E51 /* AppDelegate.swift */,
 				4E84154B1CD4C64100950E51 /* Assets.xcassets */,
+				4EA65EE81CD55DA5006EBCA9 /* Extensions */,
 				4EFA4F511CD4C9E400F649C6 /* Frameworks */,
 				4EAA3BDB1CD4D42F0047B605 /* Managers */,
 				4EFA4F6C1CD4CB0100F649C6 /* Navigation */,
@@ -122,6 +127,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4EA65EE81CD55DA5006EBCA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4EAA3BDB1CD4D42F0047B605 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +148,7 @@
 			children = (
 				4EAA3BDF1CD4D4380047B605 /* BridgeDiscoveryViewController.swift */,
 				4EAA3BE01CD4D4380047B605 /* LightsViewController.swift */,
+				4EA65EED1CD56065006EBCA9 /* TabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -249,10 +263,12 @@
 				4EA65EE31CD4D603006EBCA9 /* DDFileLogger.m in Sources */,
 				4EAA3BDD1CD4D42F0047B605 /* HueManager.swift in Sources */,
 				4EA65EE11CD4D603006EBCA9 /* DDAbstractDatabaseLogger.m in Sources */,
+				4EA65EEA1CD55DB3006EBCA9 /* UIColorExtension.swift in Sources */,
 				4EFA4F6E1CD4CB0100F649C6 /* NavigationController.swift in Sources */,
 				4EA65EE61CD4D603006EBCA9 /* ContextFilterLogFormatter.m in Sources */,
 				4E8415451CD4C64100950E51 /* AppDelegate.swift in Sources */,
 				4EA65EE41CD4D603006EBCA9 /* DDLog.m in Sources */,
+				4EA65EEE1CD56065006EBCA9 /* TabBarController.swift in Sources */,
 				4EA65EE21CD4D603006EBCA9 /* DDASLLogger.m in Sources */,
 				4EAA3BE21CD4D4380047B605 /* LightsViewController.swift in Sources */,
 			);

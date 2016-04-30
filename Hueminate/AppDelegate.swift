@@ -17,22 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // Start the local heartbeat
-        HueManager.sharedInstance.enableLocalHeartbeat()
-        
         // Initialize the window
         let window: UIWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        // Initialize the navigation controller
-        let navigationController = NavigationController(rootViewController: UIViewController())
+        // Initialize the tab bar controller
+        let tabBarController = TabBarController()
         
-        // If the app isn't connected to a bridge, begin the discovery process
-        if (HueManager.sharedInstance.connectedBridge == nil)
-        {
-            // Initialize a bridge discovery view controller
-            let discoveryViewController = BridgeDiscoveryViewController()
-            navigationController.pushViewController(discoveryViewController, animated: false)
-        }
+        // Initialize the navigation controller
+        let navigationController = NavigationController(rootViewController: tabBarController)
         
         // Set the root view controller and make visible
         window.rootViewController = navigationController
@@ -40,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set the reference to the window
         self.window = window
+        
+        // If the app is already connected to a bridge, start the local heartbeat
+        if (HueManager.sharedInstance.connectedBridge != nil)
+        {
+            HueManager.sharedInstance.enableLocalHeartbeat()
+        }
         
         return true
     }
@@ -50,12 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // Stop the heartbeat
+        HueManager.sharedInstance.disableLocalHeartbeat()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        // Start the heartbeat
+        HueManager.sharedInstance.enableLocalHeartbeat()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -65,8 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
 

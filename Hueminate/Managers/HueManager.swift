@@ -59,6 +59,7 @@ class HueManager: NSObject
     
     // MARK: - Public Variables
     
+    /// The bridge the app is connected to.
     var connectedBridge: PHBridgeConfiguration? {
         return PHBridgeResourcesReader.readBridgeResourcesCache().bridgeConfiguration
     }
@@ -87,6 +88,19 @@ class HueManager: NSObject
         #endif
     }
     
+    
+    // MARK: - Notifications
+    
+    func registerObject(object: AnyObject, withSelector selector: Selector, forNotificationName notification: String)
+    {
+        PHNotificationManager.defaultManager().registerObject(object, withSelector: selector, forNotification: notification)
+    }
+    
+    func deregisterObjectForAllNotifications(object: AnyObject)
+    {
+        PHNotificationManager.defaultManager().deregisterObjectForAllNotifications(object)
+    }
+
     
     // MARK: - Bridge Discovery
     
@@ -132,6 +146,8 @@ class HueManager: NSObject
             // DEBUG, use the first object
             if let bridge = bridgesFound.first, id = bridge.0 as? String, ip = bridge.1 as? String
             {
+                self.hueSDK?.setBridgeToUseWithId(id, ipAddress: ip)
+                self.hueSDK?.enableLocalConnection()
                 completion(bridge: HueBridge(id: id, ip: ip))
             }
             else
@@ -157,13 +173,9 @@ class HueManager: NSObject
     /**
      This method starts the push link authentication. After being called,
      there is a 30 second window for a bridge's link button to be pushed.
-     
-     - parameter bridge: the HueBridge structure containing the ID and IP
-     of the bridge to authenticate and connect to.
      */
-    func startPushLinkAuthenticationWithBridge(bridge: HueBridge)
+    func startPushLinkAuthentication()
     {
-        self.hueSDK?.setBridgeToUseWithId(bridge.id, ipAddress: bridge.ip)
         self.hueSDK?.startPushlinkAuthentication()
     }
     

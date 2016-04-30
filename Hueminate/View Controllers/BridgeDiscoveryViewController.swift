@@ -10,6 +10,21 @@ import UIKit
 
 private extension Selector {
     static let buttonPressed = #selector(BridgeDiscoveryViewController.buttonPressed)
+    static let authenticationSuccess = #selector(BridgeDiscoveryViewController.authenticationSuccess)
+    static let authenticationFailure = #selector(BridgeDiscoveryViewController.authenticationFailure)
+    static let noLocalConnection = #selector(BridgeDiscoveryViewController.noLocalConnection)
+    static let noLocalBridge = #selector(BridgeDiscoveryViewController.noLocalBridge)
+    static let bridgeButtonNotPressed = #selector(BridgeDiscoveryViewController.bridgeButtonNotPressed)
+}
+
+protocol BridgeDiscoveryViewControllerDelegate: NSObjectProtocol {
+    /**
+     This method tells the delegate if the push link authentication was 
+     successful or not.
+     
+     - parameter success: true if successful, false otherwise
+     */
+    func pushLinkAuthenticationSuccessful(success: Bool)
 }
 
 /// This ViewController is used for the bridge discovery process. 
@@ -21,6 +36,9 @@ class BridgeDiscoveryViewController: UIViewController {
     
     private weak var button: UIButton?
     
+    
+    /// The delegate of the BridgeDiscoveryViewController
+    weak var delegate: BridgeDiscoveryViewControllerDelegate?
     
     // MARK: - Initialization
     
@@ -110,7 +128,15 @@ class BridgeDiscoveryViewController: UIViewController {
     
     private func startPushLinkAuthenticationWithBridge(bridge: HueBridge)
     {
-        HueManager.sharedInstance.startPushLinkAuthenticationWithBridge(bridge)
+        // Register for notifications about the authentication
+        HueManager.sharedInstance.registerObject(self, withSelector: .authenticationSuccess, forNotificationName: PUSHLINK_LOCAL_AUTHENTICATION_SUCCESS_NOTIFICATION)
+        HueManager.sharedInstance.registerObject(self, withSelector: .authenticationFailure, forNotificationName: PUSHLINK_LOCAL_AUTHENTICATION_FAILED_NOTIFICATION)
+        HueManager.sharedInstance.registerObject(self, withSelector: .noLocalConnection, forNotificationName: PUSHLINK_NO_LOCAL_CONNECTION_NOTIFICATION)
+        HueManager.sharedInstance.registerObject(self, withSelector: .noLocalBridge, forNotificationName: PUSHLINK_NO_LOCAL_BRIDGE_KNOWN_NOTIFICATION)
+        HueManager.sharedInstance.registerObject(self, withSelector: .bridgeButtonNotPressed, forNotificationName: PUSHLINK_BUTTON_NOT_PRESSED_NOTIFICATION)
+        
+        // Start the authentication process
+        HueManager.sharedInstance.startPushLinkAuthentication()
         
         let label = UILabel(frame: CGRectMake(0.0, 0.0, 320.0, 44.0))
         label.text = "Push the button on your bridge"
@@ -118,5 +144,37 @@ class BridgeDiscoveryViewController: UIViewController {
         label.center = self.view.center
         
         self.view.addSubview(label)
+    }
+    
+    
+    // MARK: - Authentication Notification Methods
+    
+    func authenticationSuccess()
+    {
+        HueManager.sharedInstance.deregisterObjectForAllNotifications(self)
+        self.delegate?.pushLinkAuthenticationSuccessful(true)
+    }
+    
+    func authenticationFailure()
+    {
+        HueManager.sharedInstance.deregisterObjectForAllNotifications(self)
+        self.delegate?.pushLinkAuthenticationSuccessful(false)
+    }
+    
+    func noLocalConnection()
+    {
+        HueManager.sharedInstance.deregisterObjectForAllNotifications(self)
+        self.delegate?.pushLinkAuthenticationSuccessful(false)
+    }
+    
+    func noLocalBridge()
+    {
+        HueManager.sharedInstance.deregisterObjectForAllNotifications(self)
+        self.delegate?.pushLinkAuthenticationSuccessful(false)
+    }
+    
+    func bridgeButtonNotPressed()
+    {
+        
     }
 }
