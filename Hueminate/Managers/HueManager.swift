@@ -8,6 +8,126 @@
 
 import UIKit
 
+/// These notifications are used by the SDK to send notifications to the application using the SDK.
+enum HueNotification
+{
+    // MARK: - Connection Notifications 
+    
+    /// Notification for when a local connection to the bridge is made.
+    case LocalConnection
+    
+    /// Notification for when local connection to bridge is lost.
+    case NoLocalConnection
+    
+    /// Notification for when no local bridge is known.
+    case NoLocalBridge
+    
+    /// Notification for when no local authentication is present.
+    case NoLocalAuthentication
+    
+    /// Notification for when the data returned by the bridge could not be parsed during a heartbeat.
+    case HeartbeatParseError
+    
+    /// Notification for when a heartbeat timer event for a resource type is called and the current 
+    /// bridge doesn't support multi resource heartbeat.
+    case HeartbeatMultiRescourseNotSupported
+    
+    /// Notification for when local heartbeat is processed successfully.
+    case LocalHeartbeatProcessingSuccessful
+    
+    /// Notification for when portal heartbeat is processed successfully.
+    case PortalHeartbeatProcessingSuccessful
+
+    
+    // MARK: - Push Link Notifications
+
+    /// Notification for when the local connection to bridge is lost.
+    case PushLinkNoLocalConnection
+    
+    /// Notification for when no local bridge is found.
+    case PushLinkNoLocalBridge
+    
+    /// Notification for when the push link authentication fails.
+    case PushLinkAuthenticationFailed
+    
+    /// Notification for when the push link authentication succeeds.
+    case PushLinkAuthenticationSuccessful
+    
+    /// Notification for when the push link button is not pressed during the authentication.
+    case PushLinkButtonNotPressed
+    
+    
+    // MARK: - Cache Update Notifications
+    
+    /// Notification for when the lights in the cache have changed.
+    case CacheLightsUpdated
+    
+    /// Notification for when the groups in the cache have changed.
+    case CacheGroupsUpdated
+    
+    /// Notification for when the schedules in the cache have changed.
+    case CacheSchedulesUpdated
+    
+    /// Notification for when the scenes in the cache have changed.
+    case CacheScenesUpdated
+    
+    /// Notification for when the sensors in the cache have changed.
+    case CacheSensorsUpdated
+    
+    /// Notification for when the rules in the cache have changed.
+    case CacheRulesUpdated
+    
+    /// Notification for when the bridge configuration in the cache has changed.
+    case CacheBridgeConfigurationUpdated
+    
+    
+    /// The name of the notification.
+    var name: String {
+        switch (self) {
+        case .LocalConnection:
+            return LOCAL_CONNECTION_NOTIFICATION
+        case .NoLocalConnection:
+            return NO_LOCAL_CONNECTION_NOTIFICATION
+        case .NoLocalBridge:
+            return NO_LOCAL_BRIDGE_KNOWN_NOTIFICATION
+        case .NoLocalAuthentication:
+            return NO_LOCAL_AUTHENTICATION_NOTIFICATION
+        case .HeartbeatParseError:
+            return HEARTBEAT_PARSE_ERROR_NOTIFICATION
+        case .HeartbeatMultiRescourseNotSupported:
+            return HEARTBEAT_MULTI_RESOURCE_NOT_SUPPORTED_NOTIFICATION
+        case .LocalHeartbeatProcessingSuccessful:
+            return LOCAL_HEARTBEAT_PROCESSING_SUCCESSFUL_NOTIFICATION
+        case .PortalHeartbeatProcessingSuccessful:
+            return PORTAL_HEARTBEAT_PROCESSING_SUCCESSFUL_NOTIFICATION
+        case .PushLinkNoLocalConnection:
+            return PUSHLINK_NO_LOCAL_CONNECTION_NOTIFICATION
+        case .PushLinkNoLocalBridge:
+            return PUSHLINK_NO_LOCAL_BRIDGE_KNOWN_NOTIFICATION
+        case .PushLinkAuthenticationFailed:
+            return PUSHLINK_LOCAL_AUTHENTICATION_FAILED_NOTIFICATION
+        case .PushLinkAuthenticationSuccessful:
+            return PUSHLINK_LOCAL_AUTHENTICATION_SUCCESS_NOTIFICATION
+        case .PushLinkButtonNotPressed:
+            return PUSHLINK_BUTTON_NOT_PRESSED_NOTIFICATION
+        case .CacheLightsUpdated:
+            return LIGHTS_CACHE_UPDATED_NOTIFICATION
+        case .CacheGroupsUpdated:
+            return GROUPS_CACHE_UPDATED_NOTIFICATION
+        case .CacheSchedulesUpdated:
+            return SCHEDULES_CACHE_UPDATED_NOTIFICATION
+        case .CacheScenesUpdated:
+            return SCENES_CACHE_UPDATED_NOTIFICATION
+        case .CacheRulesUpdated:
+            return RULES_CACHE_UPDATED_NOTIFICATION
+        case .CacheSensorsUpdated:
+            return SENSORS_CACHE_UPDATED_NOTIFICATION
+        case .CacheBridgeConfigurationUpdated:
+            return BRIDGE_CONFIGURATION_CACHE_UPDATED_NOTIFICATION
+        }
+    }
+}
+
 /// The HueBridge structure represents a bridge
 /// before it's connected to the app. All we know
 /// about it is the BridgeID and IP Address.
@@ -73,6 +193,7 @@ class HueManager: NSObject
     /// The search object that tries to discover bridges.
     private var bridgeSearch: PHBridgeSearching?
     
+    
     // MARK: - Initialization
     
     private override init()
@@ -91,11 +212,34 @@ class HueManager: NSObject
     
     // MARK: - Notifications
     
-    func registerObject(object: AnyObject, withSelector selector: Selector, forNotificationName notification: String)
+    /**
+     This method registers the object passed in for a notification.
+     
+     - parameter object:       the object to register
+     - parameter selector:     the action to execute when the notification is received
+     - parameter notification: the notification to register the object for
+     */
+    func registerObject(object: AnyObject, withSelector selector: Selector, forNotification notification: HueNotification)
     {
-        PHNotificationManager.defaultManager().registerObject(object, withSelector: selector, forNotification: notification)
+        PHNotificationManager.defaultManager().registerObject(object, withSelector: selector, forNotification: notification.name)
     }
     
+    /**
+     This method deregisters the object passed in for a notification.
+     
+     - parameter object:       the object to deregister
+     - parameter notification: the notification to deregister the object for
+     */
+    func deregisterObject(object: AnyObject, forNotification notification: HueNotification)
+    {
+        PHNotificationManager.defaultManager().deregisterObject(object, forNotification: notification.name)
+    }
+    
+    /**
+     This method deregisters the object passed in from all HueNotifications.
+     
+     - parameter object: the object to deregister
+     */
     func deregisterObjectForAllNotifications(object: AnyObject)
     {
         PHNotificationManager.defaultManager().deregisterObjectForAllNotifications(object)

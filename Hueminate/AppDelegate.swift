@@ -33,11 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set the reference to the window
         self.window = window
         
-        // If the app is already connected to a bridge, start the local heartbeat
-        if (HueManager.sharedInstance.connectedBridge != nil)
-        {
-            HueManager.sharedInstance.enableLocalHeartbeat()
-        }
+        // Start the local heartbeat
+        HueManager.sharedInstance.enableLocalHeartbeat()
         
         return true
     }

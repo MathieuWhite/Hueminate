@@ -23,7 +23,7 @@ class TabBarController: UITabBarController, BridgeDiscoveryViewControllerDelegat
         self.tabBar.barTintColor = UIColor.whiteColor()
         self.tabBar.tintColor = UIColor.blue
         
-        // Initialize the lights view controller
+        // Initialize the view controllers for the tab bar
         let lightsViewController = LightsViewController()
         
         // Set the tab bar's view controllers
@@ -50,17 +50,14 @@ class TabBarController: UITabBarController, BridgeDiscoveryViewControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        MWLog("Freed: \(self)")
+    }
+    
     
     // MARK: - BridgeDiscoveryViewControllerDelegate Methods
     
-    func pushLinkAuthenticationSuccessful(success: Bool) {
-        if (success)
-        {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
-        else
-        {
-            MWLog("Push link authentication was not successful")
-        }
+    func pushLinkAuthenticationSuccessful() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
