@@ -107,8 +107,7 @@ class BridgeDiscoveryViewController: UIViewController {
     /**
      This method
      */
-    private func setupConstraints()
-    {
+    private func setupConstraints() {
         // Views Dictionary
         var viewsDict: [String : AnyObject] = [String : AnyObject]()
         viewsDict["_btn"] = self.searchButton
@@ -134,15 +133,13 @@ class BridgeDiscoveryViewController: UIViewController {
     
     // MARK: - Instance Methods
     
-    func buttonPressed()
-    {
+    func buttonPressed() {
         self.searchButton?.enabled = false
         
         self.findBridge()
     }
     
-    private func findBridge()
-    {
+    private func findBridge() {
         HueManager.sharedInstance.searchForLocalBridge { (bridge) in
             
             if (bridge != nil)

@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// Selectors used in the LightsViewController.
 private extension Selector {
     static let buttonPressed = #selector(LightsViewController.buttonPressed)
 }
 
+/// This view controller is used to display the status of the lights.
 class LightsViewController: UIViewController {
 
     // MARK: - Variables
@@ -22,8 +24,7 @@ class LightsViewController: UIViewController {
     
     // MARK: - Initialization
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the title of the view
@@ -64,8 +65,7 @@ class LightsViewController: UIViewController {
     
     // MARK: - Auto Layout
     
-    private func setupConstraints()
-    {
+    private func setupConstraints() {
         // Views Dictionary
         var viewsDict: [String : AnyObject] = [String : AnyObject]()
         viewsDict["_lbl"] = self.titleLabel
@@ -105,8 +105,7 @@ class LightsViewController: UIViewController {
     
     // MARK: - Instance Methods
     
-    func buttonPressed()
-    {
+    func buttonPressed() {
         self.button?.enabled = false
         
         HueManager.sharedInstance.randomizeAllLights()

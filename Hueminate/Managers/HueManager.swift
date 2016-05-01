@@ -9,8 +9,8 @@
 import UIKit
 
 /// These notifications are used by the SDK to send notifications to the application using the SDK.
-enum HueNotification
-{
+enum HueNotification {
+    
     // MARK: - Connection Notifications 
     
     /// Notification for when a local connection to the bridge is made.
@@ -131,16 +131,14 @@ enum HueNotification
 /// The HueBridge structure represents a bridge
 /// before it's connected to the app. All we know
 /// about it is the BridgeID and IP Address.
-struct HueBridge
-{
+struct HueBridge {
     var id = ""
     var ip = ""
 }
 
 /// The HueColor structure represents the way a color is 
 /// represented on the Philips Hue lights.
-struct HueColor
-{
+struct HueColor {
     var hue: CGFloat        = -1.0
     var saturation: CGFloat = -1.0
     var brightness: CGFloat = -1.0
@@ -148,8 +146,8 @@ struct HueColor
 
 /// The HueManager is a singleton instance that manages
 /// the Philips Hue lights from the app.
-class HueManager: NSObject
-{
+class HueManager: NSObject {
+    
     // MARK: - Singleton
     
     /// The shared instance of the HueManager.
@@ -196,8 +194,7 @@ class HueManager: NSObject
     
     // MARK: - Initialization
     
-    private override init()
-    {
+    private override init() {
         super.init()
         
         // Create the SDK instance
@@ -219,8 +216,7 @@ class HueManager: NSObject
      - parameter selector:     the action to execute when the notification is received
      - parameter notification: the notification to register the object for
      */
-    func registerObject(object: AnyObject, withSelector selector: Selector, forNotification notification: HueNotification)
-    {
+    func registerObject(object: AnyObject, withSelector selector: Selector, forNotification notification: HueNotification) {
         PHNotificationManager.defaultManager().registerObject(object, withSelector: selector, forNotification: notification.name)
     }
     
@@ -230,8 +226,7 @@ class HueManager: NSObject
      - parameter object:       the object to deregister
      - parameter notification: the notification to deregister the object for
      */
-    func deregisterObject(object: AnyObject, forNotification notification: HueNotification)
-    {
+    func deregisterObject(object: AnyObject, forNotification notification: HueNotification) {
         PHNotificationManager.defaultManager().deregisterObject(object, forNotification: notification.name)
     }
     
@@ -240,8 +235,7 @@ class HueManager: NSObject
      
      - parameter object: the object to deregister
      */
-    func deregisterObjectForAllNotifications(object: AnyObject)
-    {
+    func deregisterObjectForAllNotifications(object: AnyObject) {
         PHNotificationManager.defaultManager().deregisterObjectForAllNotifications(object)
     }
 
@@ -252,8 +246,7 @@ class HueManager: NSObject
      This method starts the local heartbeat.
      It checks if we are already connected to a bridge.
      */
-    func enableLocalHeartbeat()
-    {
+    func enableLocalHeartbeat() {
         // Check if we are already connected to a bridge
         if (self.connectedBridge != nil)
         {
@@ -265,16 +258,14 @@ class HueManager: NSObject
     /**
      This method stops the local heartbeat.
      */
-    func disableLocalHeartbeat()
-    {
+    func disableLocalHeartbeat() {
         self.hueSDK?.disableLocalConnection()
     }
     
     /**
      This method searches for a bridge locally.
      */
-    func searchForLocalBridge(completion: (bridge: HueBridge?) -> Void)
-    {
+    func searchForLocalBridge(completion: (bridge: HueBridge?) -> Void) {
         // Stop the heartbeat
         self.disableLocalHeartbeat()
         
@@ -305,8 +296,7 @@ class HueManager: NSObject
     /**
      This method cancels the bridge search and deinitializes the instance.
      */
-    func cancelBridgeSearch()
-    {
+    func cancelBridgeSearch() {
         self.bridgeSearch?.cancelSearch()
         self.bridgeSearch = nil
     }
@@ -318,8 +308,7 @@ class HueManager: NSObject
      This method starts the push link authentication. After being called,
      there is a 30 second window for a bridge's link button to be pushed.
      */
-    func startPushLinkAuthentication()
-    {
+    func startPushLinkAuthentication() {
         self.hueSDK?.startPushlinkAuthentication()
     }
     
@@ -331,8 +320,7 @@ class HueManager: NSObject
      randomizes their colors. If a the state of a light is off, it will
      be ignored.
      */
-    func randomizeAllLights()
-    {
+    func randomizeAllLights() {
         let api = PHBridgeSendAPI()
 
         // Loop through the lights
@@ -372,8 +360,7 @@ class HueManager: NSObject
      
      - returns: the HueColor if the UIColor could be represented in the HSB color space, nil otherwise
      */
-    func getHueColor(fromColor color: UIColor) -> HueColor?
-    {
+    func getHueColor(fromColor color: UIColor) -> HueColor? {
         // Reference the color components
         var hue: CGFloat        = 0.0
         var saturation: CGFloat = 0.0
