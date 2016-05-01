@@ -13,6 +13,16 @@ class TabBarController: UITabBarController, BridgeDiscoveryViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the background color
+        self.view.backgroundColor = UIColor.lightGray
+        
+        // Customize the tab bar color
+        self.tabBar.backgroundImage = UIImage()
+        self.tabBar.shadowImage = UIImage()
+        self.tabBar.translucent = false
+        self.tabBar.barTintColor = UIColor.whiteColor()
+        self.tabBar.tintColor = UIColor.blue
+        
         // Initialize the lights view controller
         let lightsViewController = LightsViewController()
         

@@ -19,6 +19,7 @@
 		4EA65EE71CD4D603006EBCA9 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EDF1CD4D603006EBCA9 /* DispatchQueueLogFormatter.m */; };
 		4EA65EEA1CD55DB3006EBCA9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */; };
 		4EA65EEE1CD56065006EBCA9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EED1CD56065006EBCA9 /* TabBarController.swift */; };
+		4EA65EF01CD590AC006EBCA9 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA65EEF1CD590AC006EBCA9 /* UIFontExtension.swift */; };
 		4EAA3BDD1CD4D42F0047B605 /* HueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BDC1CD4D42F0047B605 /* HueManager.swift */; };
 		4EAA3BE11CD4D4380047B605 /* BridgeDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BDF1CD4D4380047B605 /* BridgeDiscoveryViewController.swift */; };
 		4EAA3BE21CD4D4380047B605 /* LightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA3BE01CD4D4380047B605 /* LightsViewController.swift */; };
@@ -46,6 +47,7 @@
 		4EA65EDF1CD4D603006EBCA9 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		4EA65EED1CD56065006EBCA9 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4EA65EEF1CD590AC006EBCA9 /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		4EAA3BDC1CD4D42F0047B605 /* HueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueManager.swift; sourceTree = "<group>"; };
 		4EAA3BDF1CD4D4380047B605 /* BridgeDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeDiscoveryViewController.swift; sourceTree = "<group>"; };
 		4EAA3BE01CD4D4380047B605 /* LightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				4EA65EE91CD55DB3006EBCA9 /* UIColorExtension.swift */,
+				4EA65EEF1CD590AC006EBCA9 /* UIFontExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EAA3BE11CD4D4380047B605 /* BridgeDiscoveryViewController.swift in Sources */,
+				4EA65EF01CD590AC006EBCA9 /* UIFontExtension.swift in Sources */,
 				4EA65EE71CD4D603006EBCA9 /* DispatchQueueLogFormatter.m in Sources */,
 				4EA65EE51CD4D603006EBCA9 /* DDTTYLogger.m in Sources */,
 				4EA65EE31CD4D603006EBCA9 /* DDFileLogger.m in Sources */,

@@ -47,12 +47,12 @@ class BridgeDiscoveryViewController: UIViewController {
         super.viewDidLoad()
 
         // Set the background color
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.blue
         
         // Initialize the button
-        let button: UIButton = UIButton(type: UIButtonType.System)
-        button.setTitle(NSLocalizedString("Find Bridge", comment: ""), forState: UIControlState.Normal)
-        button.addTarget(self, action: .buttonPressed, forControlEvents: UIControlEvents.TouchUpInside)
+        let button: UIButton = UIButton(type: .System)
+        button.setTitle(NSLocalizedString("Find Bridge", comment: ""), forState: .Normal)
+        button.addTarget(self, action: .buttonPressed, forControlEvents: .TouchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         // Add the button to the view

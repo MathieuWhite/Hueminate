@@ -26,8 +26,12 @@ class LightsViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        // Set the title of the view
+        self.title = NSLocalizedString("My Lights", comment: "")
+        self.tabBarController?.title = NSLocalizedString("My Lights", comment: "")
+        
         // Set the background color
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.lightGray
         
         // Initialize the title label
         let titleLabel = UILabel()

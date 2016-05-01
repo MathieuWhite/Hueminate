@@ -14,6 +14,24 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Set the background color 
+        self.view.backgroundColor = UIColor.lightGray
+
+        // Customize the navigation bar color
+        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationBar.shadowImage = UIImage()
+        self.navigationBar.translucent = false
+        self.navigationBar.barTintColor = UIColor.whiteColor()
+        
+        // Customize the navigation bar title
+        let titleTextAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName : UIColor.darkGray,
+            NSFontAttributeName : UIFont.navigationBarFont
+        ]
+        
+        // Set the title attributes
+        self.navigationBar.titleTextAttributes = titleTextAttributes
     }
     
     override func viewWillAppear(animated: Bool) {
