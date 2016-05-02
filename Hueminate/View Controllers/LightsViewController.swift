@@ -21,6 +21,8 @@ class LightsViewController: UIViewController {
     private weak var titleLabel: UILabel?
     private weak var button: UIButton?
     
+    private weak var tableView: UITableView?
+    
     
     // MARK: - Initialization
     
@@ -66,6 +68,7 @@ class LightsViewController: UIViewController {
     // MARK: - Auto Layout
     
     private func setupConstraints() {
+        
         // Views Dictionary
         var viewsDict: [String : AnyObject] = [String : AnyObject]()
         viewsDict["_lbl"] = self.titleLabel
@@ -74,11 +77,10 @@ class LightsViewController: UIViewController {
         
         // Metrics Dictionary
         var metricsDict: [String : AnyObject] = [String : AnyObject]()
-        metricsDict["_margin"] = 100.0
-        metricsDict["_btnV"] = 40.0
+        metricsDict["_margin"] = 40.0
         
         // Button Vertical Constraints
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[_btn]-(100.0)-|",
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[_btn]-(_margin)-|",
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: metricsDict,
             views: viewsDict))
@@ -90,13 +92,13 @@ class LightsViewController: UIViewController {
             views: viewsDict))
         
         // Label Vertical Constraints
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(100.0)-[_lbl]",
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(_margin)-[_lbl]",
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: metricsDict,
             views: viewsDict))
         
         // Label Horizontal Constraints
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(40.0)-[_lbl]-(40.0)-|",
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(_margin)-[_lbl]-(_margin)-|",
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: metricsDict,
             views: viewsDict))
