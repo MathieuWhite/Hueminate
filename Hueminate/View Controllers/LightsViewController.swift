@@ -44,8 +44,8 @@ class LightsViewController: UIViewController {
         
         // Initialize the button
         let button: UIButton = UIButton(type: UIButtonType.System)
-        button.setTitle(NSLocalizedString("Randomize Lights", comment: ""), forState: UIControlState.Normal)
-        button.addTarget(self, action: .buttonPressed, forControlEvents: UIControlEvents.TouchUpInside)
+        button.setTitle(NSLocalizedString("Randomize Lights", comment: ""), forState: .Normal)
+        button.addTarget(self, action: .buttonPressed, forControlEvents: .TouchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(titleLabel)
